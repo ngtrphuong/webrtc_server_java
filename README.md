@@ -1,30 +1,30 @@
 
 ## Override
 
-配合
+Corresponding app - 
 https://github.com/ddssingsong/webrtc_android
-使用的一套服务器java版本
+A set of server java version used
 
-实现基本的信令收发，配合Android端实现基本的呼叫、响铃、挂断、语音通话、视频通话的功能
+Realize basic signaling sending and receiving, and cooperate with Android to realize basic calling, ringing, hanging up, voice calling, and video calling functions
 
 
-Android访问地址为ws://ip:port/websocket
+Android access address is ws://ip:port/websocket
 
-## 分支介绍
+## Branch introduction
 
 *master*
 
-配合Android端Java版本业务逻辑，实现基本的呼叫、响铃、语音通话、视频通话的功能
+Cooperate with the business logic of the Java version on the Android side to realize the basic functions of calling, ringing, voice calling, and video calling
 
 *nodejs_copy*
 
-将nodejs版本https://github.com/ddssingsong/webrtc_server_node 使用java写了一遍
+Change nodejs version https://github.com/ddssingsong/webrtc_server_node Wrote it in java
 
 
-## 信令相关
+## Signaling related
 
 
-1. 登录成功，返回个人信息，用来显示用户的在线状态
+1. Log in successfully, return personal information, used to display the user's online status
 
    ```json
    {
@@ -38,32 +38,32 @@ Android访问地址为ws://ip:port/websocket
 
    
 
-2. 邀请加入房间
+2. Invite to join the room
 
    ```json
-   # 服务器负责转发
+   # The server is responsible for forwarding
    {		
      "eventName":"__invite",
      "data":{
            "room":"room",
            "roomSize":"9",
-           "mediaType":"1",  // 0 视频 1 语音
+           "mediaType":"1",  // 0 video 1 voice
        	"inviteID":"userId",
-           "userList":"userId,usrId,userId"  #逗号分割
+           "userList":"userId,usrId,userId"  #Comma separated
        }
    }
    
-   1. 创建房间
-   2. 发送邀请
+   1. Create a room
+   2. Send invitation
    3.
    ```
 
    
 
-3. 取消拨出
+3. Cancel outgoing
 
    ```
-   在拨打的过程中取消邀请
+   Cancel the invitation during the call
    {
        "eventName":"__cancel",
        "data":{
@@ -75,7 +75,7 @@ Android访问地址为ws://ip:port/websocket
 
    
 
-4. 对方已响铃
+4. The other party has ringed
 
    ```json
    {
@@ -86,36 +86,3 @@ Android访问地址为ws://ip:port/websocket
        }
    }
    ```
-
-  
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
