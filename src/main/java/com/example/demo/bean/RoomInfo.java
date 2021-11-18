@@ -9,16 +9,16 @@ public class RoomInfo {
     // roomId
     @JsonFormat
     private String roomId;
-    // 创建人Id
+    // Creator Id
     @JsonFormat
     private String userId;
-    // 房间里的人
+    // People in the room
     @JsonIgnore
     private CopyOnWriteArrayList<UserBean> userBeans = new CopyOnWriteArrayList<>();
-    // 房间大小
+    // Room size
     @JsonFormat
     private int maxSize;
-    // 现有人数
+    // Existing number
     @JsonFormat
     private int currentSize;
 

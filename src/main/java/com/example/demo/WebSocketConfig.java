@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 
 /**
- * 开启WebSocket支持 配置websocket并开启
+ * Enable WebSocket support Configure websocket and enable
  */
 @Configuration
 public class WebSocketConfig extends WebMvcConfigurationSupport {
@@ -19,9 +19,9 @@ public class WebSocketConfig extends WebMvcConfigurationSupport {
     @Override
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
         super.addResourceHandlers(registry);
-        // 相对路径
+        // Relative path of image
         registry.addResourceHandler("image/**").addResourceLocations("classpath:/static/image/");
-        // 绝对路径
+        // Absolute path
         // registry.addResourceHandler("image/**").addResourceLocations("file:" + "image/");
     }
 }

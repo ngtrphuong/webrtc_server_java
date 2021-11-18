@@ -17,7 +17,7 @@ public class UserControl {
 
     @RequestMapping("/")
     public String index() {
-        return "welcome to my webRTC demo";
+        return "Welcome to my webRTC chat tool";
     }
 
 

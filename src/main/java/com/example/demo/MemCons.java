@@ -8,10 +8,10 @@ import java.util.concurrent.ConcurrentHashMap;
 public class MemCons {
 
 
-    // 在线用户表
+    // Online User Form
     public static ConcurrentHashMap<String, UserBean> userBeans = new ConcurrentHashMap<>();
 
-    // 在线房间表
+    // Online room table
     public static ConcurrentHashMap<String, RoomInfo> rooms = new ConcurrentHashMap<>();
 
 }
