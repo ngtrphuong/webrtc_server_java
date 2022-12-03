@@ -1,9 +1,9 @@
-package com.example.demo;
-
-import com.example.demo.bean.RoomInfo;
-import com.example.demo.bean.UserBean;
+package com.ngtrphuong.webrtc;
 
 import java.util.concurrent.ConcurrentHashMap;
+
+import com.ngtrphuong.webrtc.bean.RoomInfo;
+import com.ngtrphuong.webrtc.bean.UserBean;
 
 public class MemCons {
 

@@ -1,9 +1,9 @@
-package com.example.demo.bean;
+package com.ngtrphuong.webrtc.bean;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.websocket.Session;
+import jakarta.websocket.Session;
 
 public class UserBean {
 

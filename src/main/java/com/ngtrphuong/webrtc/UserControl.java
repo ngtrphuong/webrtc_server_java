@@ -1,16 +1,16 @@
-package com.example.demo;
+package com.ngtrphuong.webrtc;
 
 
-import com.example.demo.bean.RoomInfo;
-import com.example.demo.bean.UserBean;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.ngtrphuong.webrtc.bean.RoomInfo;
+import com.ngtrphuong.webrtc.bean.UserBean;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.function.Consumer;
 
 @RestController
 public class UserControl {

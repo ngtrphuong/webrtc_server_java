@@ -1,6 +1,6 @@
-package com.example.demo.bean;
+package com.ngtrphuong.webrtc.bean;
 
-import javax.websocket.Session;
+import jakarta.websocket.Session;
 
 public class DeviceSession {
     private Session session;

@@ -1,4 +1,4 @@
-package com.example.demo.bean;
+package com.ngtrphuong.webrtc.bean;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;

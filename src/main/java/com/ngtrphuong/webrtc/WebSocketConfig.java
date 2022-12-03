@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.ngtrphuong.webrtc;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,10 +18,10 @@ public class WebSocketConfig extends WebMvcConfigurationSupport {
 
     @Override
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
-        super.addResourceHandlers(registry);
+       super.addResourceHandlers(registry);
         // Relative path of image
-        registry.addResourceHandler("image/**").addResourceLocations("classpath:/static/image/");
+       registry.addResourceHandler("image/**").addResourceLocations("classpath:/static/image/");
         // Absolute path
-        // registry.addResourceHandler("image/**").addResourceLocations("file:" + "image/");
+        registry.addResourceHandler("image/**").addResourceLocations("file:" + "image/");
     }
 }

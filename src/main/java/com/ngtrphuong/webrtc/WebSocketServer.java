@@ -1,30 +1,29 @@
-package com.example.demo;
+package com.ngtrphuong.webrtc;
 
 
-import com.example.demo.bean.DeviceSession;
-import com.example.demo.bean.EventData;
-import com.example.demo.bean.RoomInfo;
-import com.example.demo.bean.UserBean;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
+import com.ngtrphuong.webrtc.bean.EventData;
+import com.ngtrphuong.webrtc.bean.RoomInfo;
+import com.ngtrphuong.webrtc.bean.UserBean;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import javax.websocket.OnClose;
-import javax.websocket.OnMessage;
-import javax.websocket.OnOpen;
-import javax.websocket.Session;
-import javax.websocket.server.PathParam;
-import javax.websocket.server.ServerEndpoint;
+import jakarta.websocket.OnClose;
+import jakarta.websocket.OnMessage;
+import jakarta.websocket.OnOpen;
+import jakarta.websocket.Session;
+import jakarta.websocket.server.PathParam;
+import jakarta.websocket.server.ServerEndpoint;
+
+import static com.ngtrphuong.webrtc.MemCons.rooms;
+
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.UUID;
 import java.util.concurrent.CopyOnWriteArrayList;
-
-import static com.example.demo.MemCons.rooms;
 
 @ServerEndpoint("/ws/{userId}/{device}")
 @Component
@@ -33,7 +32,7 @@ public class WebSocketServer {
 
     private String userId;
     private static Gson gson = new Gson();
-    private static String avatar = "p1.jpeg";
+    private static String avatar = "image.jpeg";
 
 
     // User userId login in
@@ -189,6 +188,8 @@ public class WebSocketServer {
             UserBean my = MemCons.userBeans.get(userId);
             copy.add(my);
             rooms.get(room).setUserBeans(copy);
+
+            // Send to yourself
             EventData send = new EventData();
             send.setEventName("__peers");
             Map<String, Object> map = new HashMap<>();
@@ -314,20 +315,21 @@ public class WebSocketServer {
         if (sb.length() > 0) {
             sb.deleteCharAt(sb.length() - 1);
         }
+
+        // Send a message to yourself
         map.put("connections", sb.toString());
         map.put("you", userID);
         map.put("roomSize", roomInfo.getMaxSize());
         send.setData(map);
         sendMsg(my, -1, gson.toJson(send));
 
-
+        // 3. Send messages to other people in the room
         EventData newPeer = new EventData();
         newPeer.setEventName("__new_peer");
         Map<String, Object> sendMap = new HashMap<>();
         sendMap.put("userID", userID);
         newPeer.setData(sendMap);
 
-        // 3. Send messages to other people in the room
         for (UserBean userBean : roomUserBeans) {
             if (userBean.getUserId().equals(userID)) {
                 continue;
@@ -395,14 +397,17 @@ public class WebSocketServer {
         String room = (String) data.get("room");
         String userId = (String) data.get("fromID");
         if (userId == null) return;
+        // Get room information
         RoomInfo roomInfo = MemCons.rooms.get(room);
+        // Get the user list in the room
         CopyOnWriteArrayList<UserBean> roomInfoUserBeans = roomInfo.getUserBeans();
-        Iterator<UserBean> iterator = roomInfoUserBeans.iterator();
-        while (iterator.hasNext()) {
-            UserBean userBean = iterator.next();
+        // Send the message to the other people from the room
+        for (UserBean userBean : roomInfoUserBeans) {
+            // Exclude yourself
             if (userId.equals(userBean.getUserId())) {
                 continue;
             }
+            // Send a message
             sendMsg(userBean, -1, message);
 
             if (roomInfoUserBeans.size() == 1) {
